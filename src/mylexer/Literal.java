@@ -1,4 +1,4 @@
-package lexer;
+package mylexer;
 
 public class Literal extends Token {
 	private String value;

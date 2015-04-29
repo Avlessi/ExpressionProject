@@ -1,19 +1,17 @@
-package parser;
+package myparser;
 
 import java.io.IOException;
 
-import state.State;
-import lexer.Identificateur;
-import lexer.IfToken;
-import lexer.LPar;
-import lexer.Literal;
-import lexer.Op;
-import lexer.RPar;
-import lexer.SLexer;
-//import lexer.LexicalLiteral;
-import lexer.Token;
-import lexer.UnexpectedCharacter;
-import lexer.VOp;
+import mylexer.Identificateur;
+import mylexer.LPar;
+import mylexer.Literal;
+import mylexer.Op;
+import mylexer.RPar;
+import mylexer.SLexer;
+import mylexer.Token;
+import mylexer.UnexpectedCharacter;
+import mylexer.VOp;
+import mystate.State;
 
 public abstract class Expression extends AST{
 	
@@ -26,11 +24,11 @@ public abstract class Expression extends AST{
 		}		
 	}
 	
-	public abstract int eval(State<Integer> stVar, State<Function> stFunc) throws SemanticException;
+	public abstract int eval();
 
 	public static Expression parseCompositeExpression(Token t) throws UnexpectedCharacter, IOException, SyntaxError {  //parse binary, unary and condition exp	
-					
-		if(t instanceof Op) {  
+		return null;			
+		/*if(t instanceof Op) {  
 			VOp op = ((Op) t).getOperation();
 			Expression exp1 = Expression.parse(SLexer.getToken());
 			
@@ -64,7 +62,8 @@ public abstract class Expression extends AST{
 			f.parseFunction(SLexer.getToken());
 			return f;
 		}
-		else throw new SyntaxError(t + " is not resolved in a line " + SLexer.getCurrentLine());	
+		else throw new SyntaxError(t + " is not resolved in a line " + SLexer.getCurrentLine());*/
+		
 	}
 
 	public static Expression parseSimpleExpression(Token token) throws SyntaxError { //parse variable or literal

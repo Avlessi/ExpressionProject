@@ -1,4 +1,4 @@
-package lexer;
+package mylexer;
 
 
 import java.io.IOException;

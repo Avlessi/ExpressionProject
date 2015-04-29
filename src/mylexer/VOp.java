@@ -1,4 +1,4 @@
-package lexer;
+package mylexer;
 
 public enum VOp {
 	PLUS,

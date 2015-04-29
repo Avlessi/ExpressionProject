@@ -1,4 +1,4 @@
-package lexer;
+package mylexer;
 
 public class RPar extends Token{
 	public String toString() {

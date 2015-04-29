@@ -1,6 +1,6 @@
-package parser;
+package myparser;
 
-import state.State;
+import mystate.State;
 
 public class SyntaxLiteral extends Expression{
 	private int val;
@@ -12,7 +12,13 @@ public class SyntaxLiteral extends Expression{
 		return "Literal(" + Integer.toString(val) + ")";
 	}
 	
-	public int eval(State<Integer> stVar, State<Function> stFunc) throws SemanticException {
+//	public int eval(State<Integer> stVar, State<Function> stFunc) throws SemanticException {
+//		return val;
+//	}
+
+	@Override
+	public int eval() {
+		
 		return val;
 	}		
 	

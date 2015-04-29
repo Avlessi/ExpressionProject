@@ -1,4 +1,4 @@
-package lexer;
+package mylexer;
 
 public class Op extends Token {
 	private VOp op;

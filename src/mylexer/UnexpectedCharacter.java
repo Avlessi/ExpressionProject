@@ -1,4 +1,4 @@
-package lexer;
+package mylexer;
 
 public class UnexpectedCharacter extends Exception {
 	public UnexpectedCharacter(int i){
