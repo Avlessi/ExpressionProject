@@ -1,0 +1,40 @@
+naive grammar
+
+exp     :                            
+        | exp '+' term                  
+        | exp '-' term
+        | term                  
+        ;
+        
+term    : term '*' factor               
+        | term '/' factor               
+        | factor
+        
+factor  : operand 
+		| UnaryExp 		                         
+        | '(' exp ')'
+        |                    
+        ;
+        
+UnaryExp: '-' factor
+
+operand : NUMBER
+		| IDENTIFIER 
+        
+
+
+factored, non-left-recursive grammar
+
+
+<Exp> ::= <Term> <Exp'> 
+<Exp'> ::= + <Exp> | - <Exp> | ε
+
+<Term> ::= <Factor> <Term'> 
+<Term'> ::= * <Term> | / <Term> | ε
+
+<Factor> ::= x | y | ... | 
+			( <Exp> ) | 
+			- <Factor>
+
+ 
+   

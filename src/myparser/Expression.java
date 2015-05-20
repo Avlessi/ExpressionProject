@@ -15,16 +15,36 @@ import mystate.State;
 
 public abstract class Expression extends AST{
 	
-	public static final Expression parse(Token t) throws UnexpectedCharacter, IOException, SyntaxError{  
-		Expression exp = Expression.parseSimpleExpression(t);
-		if(exp != null)
-			return exp;
-		else {			
-			return Expression.parseCompositeExpression(SLexer.getToken());
-		}		
+//	<Exp> ::= <Term> <Exp'> 
+//	<Exp'> ::= + <Exp> | - <Exp> | ε
+
+	
+	public static Expression parseTerm(Token t) throws UnexpectedCharacter, IOException, SyntaxError {
+		
+		Expression term = Term.parse(SLexer.getToken());		
+		return term;		
 	}
 	
 	public abstract int eval();
+	
+	
+	public static Expression parseComposite(Token t, Expression exp1) throws UnexpectedCharacter, IOException, SyntaxError {
+		if (t instanceof Op) {
+			VOp op = ((Op)t).getOperation();
+			if(op == VOp.PLUS) {
+				Expression exp2 = Expression.parseTerm(SLexer.getToken());
+				Addition add = new Addition(exp1, exp2);
+				return add;
+			}
+			else if (op == VOp.MINUS) {
+				Expression exp2 = Expression.parseTerm(SLexer.getToken());
+				Substraction sub = new Substraction(exp1, exp2);
+				return sub;
+			}
+			else throw new SyntaxError("Expression: expected operator");
+		}
+		else throw new SyntaxError("Expression: received token is not operator");		
+	}
 
 	public static Expression parseCompositeExpression(Token t) throws UnexpectedCharacter, IOException, SyntaxError {  //parse binary, unary and condition exp	
 		return null;			
