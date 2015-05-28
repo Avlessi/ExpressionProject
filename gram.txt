@@ -36,5 +36,20 @@ factored, non-left-recursive grammar
 			( <Exp> ) | 
 			- <Factor>
 
+ or
  
    
+<expr> -> <term> <term_tail>
+
+<term_tail> -> <add_op> <term> <term_tail> | e
+
+<term> -> <factor> <factor_tail>
+
+<factor_tail> -> <mult_op> <factor> <factor_tail> | e
+
+<factor> -> ( <expr> ) | - <factor>
+          | identifier | unsigned_integer
+
+<add_op> -> + | -
+
+<mult_op> -> * | /
