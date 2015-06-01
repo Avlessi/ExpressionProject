@@ -1,6 +1,5 @@
 package myinterpreter;
 
-import mystate.State;
 
 
 
@@ -10,18 +9,22 @@ public class Addition extends BinaryExp {
 	}
 
 	@Override
-	public String eval(State<Integer> stateVar) {
-		return exp1.simplif().eval(stateVar) + exp2.simplif().eval(stateVar);
-	}
-
-	@Override
-	public Expression simplif() {
-		return exp1;
+	public String eval() {
+		return this.simplif().toString();
 	}
 	
 
 	@Override
 	public String toString() {
 		return "Addition(" +  exp1 + "," + exp2 + ")";  
+	}
+
+	@Override
+	public Expression simplif() {
+		if (exp1.simplif().isCalculable() && exp2.simplif().isCalculable()) {
+			return new SyntaxLiteral(
+					Integer.parseInt(exp1.eval()) + Integer.parseInt(exp2.eval())
+					);
+		} else return this;
 	}
 }

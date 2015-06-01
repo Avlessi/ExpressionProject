@@ -7,10 +7,13 @@ import mystate.State;
 public class Variable extends Expression {
 	protected String name;
 	
-	public Variable(String text) {
+	private State<Integer> stateVar;
+	
+	public Variable(String text, State<Integer> stateVar) {
 		this.name = text;
+		this.stateVar = stateVar;
 	}
-
+	
 	public String getName() {
 		return this.name;
 	}
@@ -21,14 +24,19 @@ public class Variable extends Expression {
 	}
 
 	@Override
-	public String eval(State<Integer> stateVar) {
-		if (stateVar.lookup(this.name)!=null) {
-			return "\"" + this.name + "\": " + stateVar.lookup(this.name);
+	public String eval() {
+		if (this.stateVar.lookup(this.name)!=null) {
+			return "" + this.stateVar.lookup(this.name);
 		} else return this.name;  
 	}
 
 	@Override
 	public Expression simplif() {
 		return this;
+	}
+
+	@Override
+	public Boolean isCalculable() {
+		return (this.stateVar.lookup(this.name)!=null);
 	}
 }

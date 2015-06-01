@@ -1,6 +1,5 @@
 package myinterpreter;
 
-import mystate.State;
 
 
 
@@ -10,13 +9,17 @@ public class Substraction extends BinaryExp {
 	}
 
 	@Override
-	public String eval(State<Integer> stateVar) {
-		return exp1.eval(null) + "-" + exp2.eval(null);
+	public String eval() {
+		return this.simplif().toString();
 	}
 
 	@Override
 	public Expression simplif() {
-		return this;
+		if (exp1.simplif().isCalculable() && exp2.simplif().isCalculable()) {
+			return new SyntaxLiteral(
+					Integer.parseInt(exp1.eval()) - Integer.parseInt(exp2.eval())
+					);
+		} else return this;
 	}
 	
 

@@ -1,6 +1,5 @@
 package myinterpreter;
 
-import mystate.State;
 
 
 
@@ -13,6 +12,10 @@ public abstract class BinaryExp extends Expression{
 		this.exp2 = exp2;
 	}
 	
-	public abstract String eval(State<Integer> stateVar);	
+	public abstract String eval();	
+	
+	public Boolean isCalculable() {
+		return exp1.isCalculable() && exp2.isCalculable();
+	}
 	
 }

@@ -95,8 +95,8 @@ public class ProgramVisitor extends ExprBaseVisitor<AST> {
 
 	@Override
 	public Variable visitVariable(VariableContext ctx) {
-		Variable var = new Variable(ctx.ID().getText());
-		stateVar.bind(var.getName(), Integer.parseInt(((Expression) visitChildren(ctx.e)).eval(stateVar)));
+		Variable var = new Variable(ctx.ID().getText(), stateVar);
+		stateVar.bind(var.getName(), Integer.parseInt(((Expression) visitChildren(ctx.e)).eval()));
 		return var;
 	}
 
@@ -107,7 +107,7 @@ public class ProgramVisitor extends ExprBaseVisitor<AST> {
 
 	@Override
 	public Variable visitVariableCall(VariableCallContext ctx) {
-		return new Variable(ctx.getText());
+		return new Variable(ctx.getText(), stateVar);
 	}
 	
 }

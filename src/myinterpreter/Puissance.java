@@ -1,6 +1,5 @@
 package myinterpreter;
 
-import mystate.State;
 
 
 
@@ -10,20 +9,22 @@ public class Puissance extends BinaryExp{
 	}
 
 	@Override
-	public String eval(State<Integer> stateVar) {
-		return " (" + exp1.eval(null) + "^" + exp2.eval(null) + ") ";
+	public String eval() {
+		return this.simplif().toString();
 	}
-
-	@Override
-	public Expression simplif() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 	@Override
 	public String toString() {
 		return "Puissance(" +  exp1 + "," + exp2 + ")";  
+	}
+
+	@Override
+	public Expression simplif() {
+		if (exp1.simplif().isCalculable() && exp2.simplif().isCalculable()) {
+			return new SyntaxLiteral(
+					(int)Math.pow(Integer.parseInt(exp1.eval()), Integer.parseInt(exp2.eval()))
+					);
+		} else return this;
 	}
 	
 }

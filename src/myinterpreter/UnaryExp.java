@@ -1,6 +1,5 @@
 package myinterpreter;
 
-import mystate.State;
 
 
 
@@ -11,5 +10,9 @@ public abstract class UnaryExp extends Expression {
 		this.exp = exp;
 	}
 
-	public abstract String eval(State<Integer> stateVar);
+	public abstract String eval();
+	
+	public Boolean isCalculable() {
+		return exp.isCalculable();
+	}
 }

@@ -1,6 +1,5 @@
 package myinterpreter;
 
-import mystate.State;
 
 
 
@@ -11,21 +10,22 @@ public class SyntaxLiteral extends Expression{
 	}
 	
 	public String toString(){
-		return "Literal(" + Integer.toString(val) + ")";
+		return "" + val;
 	}
-	
-//	public int eval(State<Integer> stVar, State<Function> stFunc) throws SemanticException {
-//		return val;
-//	}
 
 	@Override
-	public String eval(State<Integer> stateVar) {
+	public String eval() {
 		return ""+val;
 	}
 
 	@Override
 	public Expression simplif() {
 		return this;
+	}
+
+	@Override
+	public Boolean isCalculable() {
+		return true;
 	}		
 	
 }

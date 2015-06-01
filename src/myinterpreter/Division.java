@@ -1,6 +1,5 @@
 package myinterpreter;
 
-import mystate.State;
 
 
 
@@ -10,15 +9,17 @@ public class Division extends BinaryExp {
 	}
 
 	@Override
-	public String eval(State<Integer> stateVar) {
-		if (!exp1.simplif().isAbstract && !exp2.simplif().isAbstract) {
-			return "" + Integer.parseInt(exp1.eval(null)) / Integer.parseInt(exp2.eval(null)) ; 
-		} else return exp1 + " / " + exp2;
+	public String eval() {
+		return this.simplif().toString();
 	}
 
 	@Override
 	public Expression simplif() {
-		return null;
+		if (exp1.simplif().isCalculable() && exp2.simplif().isCalculable()) {
+			return new SyntaxLiteral(
+					Integer.parseInt(exp1.eval()) / Integer.parseInt(exp2.eval())
+					);
+		} else return this;
 	}
 	
 
@@ -26,4 +27,5 @@ public class Division extends BinaryExp {
 	public String toString() {
 		return "Division(" +  exp1 + "," + exp2 + ")";  
 	}
+
 }

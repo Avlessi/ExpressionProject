@@ -1,6 +1,5 @@
 package myinterpreter;
 
-import mystate.State;
 
 
 
@@ -11,8 +10,8 @@ public class UnarySubstraction extends UnaryExp{
 	}
 
 	@Override
-	public String eval(State<Integer> stateVar) {
-		return "-" + this.exp.eval(null);
+	public String eval() {
+		return this.simplif().toString();
 	}
 
 	@Override
@@ -22,6 +21,12 @@ public class UnarySubstraction extends UnaryExp{
 
 	@Override
 	public Expression simplif() {
-		return this;
+		if (this.exp.isCalculable()) {
+			int i = Integer.parseInt(this.exp.eval()); 
+			return new SyntaxLiteral(i);
+		} else if (this.exp instanceof UnarySubstraction) {
+			UnarySubstraction child = (UnarySubstraction) this.exp;
+			return child.exp ;
+		} else return this;
 	}
 }

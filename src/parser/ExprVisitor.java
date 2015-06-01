@@ -2,8 +2,6 @@
 
 package parser;
 
-import java.util.HashMap;
-
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
